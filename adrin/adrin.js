@@ -19,6 +19,8 @@ var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// MY LIBS
+var logger = require('./libs/log');
 
 // CONFIG
 // view engine setup
@@ -37,8 +39,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 */
 
 // OVERRIDE EXPRESS STANDART LOGGER 
-//logger.debug("Overriding 'Express' logger");
-//app.use(morgan({ "stream": logger.stream }));
+logger.debug("Overriding 'Express' logger");
+app.use(morgan({ "stream": logger.stream }));
 
 //app.use('/', routes);
 
