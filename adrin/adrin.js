@@ -25,18 +25,18 @@ var logger = require('./libs/log');
 // CONFIG
 // view engine setup
 
-/*
+
 app.set('views', path.join(__dirname, 'views'));
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-app.use(favicon(path.join(__dirname, 'public', 'adrin.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-*/
+
 
 // OVERRIDE EXPRESS STANDART LOGGER 
 logger.debug("Overriding 'Express' logger");
