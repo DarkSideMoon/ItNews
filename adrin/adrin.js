@@ -23,10 +23,12 @@ var bodyParser = require('body-parser');
 var logger = require('./libs/log');
 var wunderground = require('./libs/wunParser');
 
+// ROUTES 
+var routes = require('./routes/index');
+
 // CONFIG
 // view engine setup
-
-
+//app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
 
 app.engine('html', require('ejs').renderFile);
@@ -43,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 logger.debug("Overriding 'Express' logger");
 app.use(morgan({ "stream": logger.stream }));
 
-//app.use('/', routes);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
