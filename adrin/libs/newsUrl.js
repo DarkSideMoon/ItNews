@@ -1,6 +1,6 @@
 'use strict';
 
-let newsUrl = () => {
+function NewsUrl() {
     this.construct = function(builder) {
         builder.buildSource();
         builder.buildSortBy();
@@ -10,4 +10,4 @@ let newsUrl = () => {
     }
 }
 
-module.exports = newsUrl;
+module.exports = NewsUrl;

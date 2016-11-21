@@ -4,6 +4,18 @@
 const hostname = 'localhost'
 const port = 3000;
 
+// News API
+const typeOfNews =  {
+    engadget: 'engadget', // News
+    polygon: 'polygon', // Game news
+    reddit: 'reddit-r-all', // Reddit
+};
+
+const typeOfHeadlines = {
+    top: 'top',
+    latest: 'latest'
+}
+
 // ==============================================
 // 					BASE SETUP 
 // ==============================================
@@ -24,6 +36,7 @@ var logger = require('./libs/log');
 var wunderground = require('./libs/wunParser');
 var wundergroundAPI = require('./libs/weatherModule');
 var scheduler = require('./libs/scheduler');
+var newsParser = require('./libs/newsParser');
 
 // ROUTES 
 var routes = require('./routes/index');
@@ -90,4 +103,10 @@ app.listen(port, function () {
   //wunderground.getWundergroundWeather();
 
   scheduler.run(1);
+
+  console.log();
+
+  newsParser.getNews(typeOfNews.engadget, typeOfHeadlines.top);
+  newsParser.getNews(typeOfNews.reddit, typeOfHeadlines.top);
+
 });

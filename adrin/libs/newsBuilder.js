@@ -7,7 +7,7 @@
 let apiUrl = 'https://newsapi.org/v1/articles?';
 let and = '&';
 
-UrlBuilder = (apiKey, typeOfNews, typeOfHeadlines) => {
+function UrlBuilder(apiKey, typeOfNews, typeOfHeadlines) {
     let url = '';
 
     this.buildSource = function() {
