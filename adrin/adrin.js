@@ -22,6 +22,8 @@ var bodyParser = require('body-parser');
 // MY LIBS
 var logger = require('./libs/log');
 var wunderground = require('./libs/wunParser');
+var wundergroundAPI = require('./libs/weatherModule');
+var scheduler = require('./libs/scheduler');
 
 // ROUTES 
 var routes = require('./routes/index');
@@ -85,5 +87,7 @@ app.use(function(err, req, res, next) {
 app.listen(port, function () {
   console.log(`Server running at http://${hostname}:${port}/`);
 
-  wunderground.getWundergroundWeather();
+  //wunderground.getWundergroundWeather();
+
+  scheduler.run(1);
 });
