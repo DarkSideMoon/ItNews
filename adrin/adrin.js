@@ -4,6 +4,15 @@
 const hostname = 'localhost'
 const port = 3000;
 
+// Itc.ua news
+const typeItcFeed =  {
+    news: 'news', // Новости
+    reviews: 'articles', // Обзоры
+    articles: 'stati', // Статьи
+    video: 'video', // Видео
+    blogs: 'blogs' // Блоги
+};
+
 // News API
 const typeOfNews =  {
     engadget: 'engadget', // News
@@ -14,7 +23,13 @@ const typeOfNews =  {
 const typeOfHeadlines = {
     top: 'top',
     latest: 'latest'
-}
+};
+
+// Dou ua 
+const douNewsType = {
+    news: 'lenta/',
+    calendar: 'calendar/'
+};
 
 // ==============================================
 // 					BASE SETUP 
@@ -36,7 +51,11 @@ var logger = require('./libs/log');
 var wunderground = require('./libs/wunParser');
 var wundergroundAPI = require('./libs/weatherModule');
 var scheduler = require('./libs/scheduler');
-var newsParser = require('./libs/newsParser');
+
+// Parsers
+var ItcNewsFeed = require('./libs/itcFeedParser');
+var NewsParser = require('./libs/newsParser');
+var DouNewsFeed = require('./libs/douParser');
 
 // ROUTES 
 var routes = require('./routes/index');
@@ -106,7 +125,22 @@ app.listen(port, function () {
 
   console.log();
 
-  newsParser.getNews(typeOfNews.engadget, typeOfHeadlines.top);
-  newsParser.getNews(typeOfNews.reddit, typeOfHeadlines.top);
+   //var itcFeedNews = new ItcNewsFeed(typeItcFeed.news, 0);
+   //itcFeedNews.getNews();
+  
+   //var itcFeedNews = new ItcNewsFeed(typeItcFeed.blogs, 0);
+   //itcFeedNews.getNews();
+
+  //var news = new NewsParser(typeOfNews.engadget, typeOfHeadlines.latest);
+  //news.getNews();
+
+  //var news2 = new NewsParser(typeOfNews.reddit, typeOfHeadlines.top);
+  //news2.getNews();
+  
+   //var douNewsFeedNews = new DouNewsFeed(douNewsType.news, 2);
+   //douNewsFeedNews.getInfo();
+
+   //var douNewsFeedEvents = new DouNewsFeed(douNewsType.calendar, 2);
+   //douNewsFeedEvents.getInfo();
 
 });
