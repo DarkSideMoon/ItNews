@@ -2,6 +2,7 @@
 
 Simple ukranian it news parser.
 With simple wrapper on `Express` server -> Adrin server 
+[![Build Status](https://travis-ci.org/DarkSideMoon/ItNews.svg?branch=master)](https://travis-ci.org/DarkSideMoon/ItNews)
 
 ![adrin](https://cloud.githubusercontent.com/assets/8173605/20859878/d2c801da-b973-11e6-800b-8850dd37ac3f.png)
 
