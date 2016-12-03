@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Simple it news server",
   "main": "adrin.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Romashchenko Pavel (GreenOwl)",
   "dependencies": {
     "body-parser": "^1.15.2",
