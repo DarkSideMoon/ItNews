@@ -20,6 +20,7 @@ var article = {
     author: '',
     imageSource: '',
     comments: 0,
+    views: 0 // Count of views
 };
 
 var calendar = {
