@@ -36,4 +36,9 @@ npm install cheerio --save
 npm install request --save 
 npm install wundergroundnode -- save
 
-
+@echo Install all libs _for testing 
+pause
+npm install mocha  --save
+npm install should --save
+npm install supertest --save-dev
+npm install jscoverage
