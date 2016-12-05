@@ -4,8 +4,7 @@
   "description": "Simple it news server",
   "main": "adrin.js",
   "scripts": {
-    "travis-lint": ".travis.yml",
-    "test": "npm test adrin/test/weather.js"
+    "test": "npm test"
   },
   "repository": {
     "type": "git",
