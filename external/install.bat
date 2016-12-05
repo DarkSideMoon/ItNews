@@ -42,3 +42,4 @@ npm install mocha  --save
 npm install should --save
 npm install supertest --save-dev
 npm install jscoverage
+npm install chai
