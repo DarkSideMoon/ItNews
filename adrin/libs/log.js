@@ -1,5 +1,6 @@
 var winston = require('winston');
 winston.emitErrs = true;
+var ENV = process.env.NODE_ENV;
 
 var logger = new winston.Logger({
     transports: [
@@ -14,7 +15,7 @@ var logger = new winston.Logger({
             colorize: true
         }),
         new winston.transports.Console({
-            level: 'debug',
+            level: (ENV == 'development') ? 'debug' : 'error',
             handleExceptions: true,
             json: false,
             colorize: true
