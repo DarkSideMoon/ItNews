@@ -32,13 +32,13 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for getting news from web site
     */
-    this.getNews = () => {
+    this.getNews = (callback) => {
         if(countOfPages == 0) {
-            getWebPage();
+            getWebPage(callback);
         } else {
             for (var i = 0, len = countOfPages; i <= len; i++) {
                 tmFeedUrl += '/page/' + i;
-                getWebPage();
+                getWebPage(callback);
                 // Something to do
                 tmFeedUrl = FeedUrl + typeFeed;
             }
@@ -48,11 +48,11 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for getting page html code
     */
-    function getWebPage() {
+    function getWebPage(callback) {
         request(tmFeedUrl, function (error, response, body) {
             if (!error) {
                 var $ = cheerio.load(body); 
-                parsePage($);    
+                parsePage($, callback);   
             } else {
                 console.log("Error: " + error);
             }
@@ -63,7 +63,7 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for parsing each of post on array
     */    
-    function parsePage($) {
+    function parsePage($, callback) {
         $("main[id='content']").each(function(element, index) {
             let el = $(this); 
             let allPosts = el[0].children;
@@ -80,7 +80,13 @@ function ItcNewsFeed(typeFeed, countPages) {
                 }
             }
         });
+        
         showInfo(posts);
+        
+        if(callback != null)
+            callback(posts);
+
+        return posts;
     };
 
     /*

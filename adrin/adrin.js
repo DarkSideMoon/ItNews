@@ -125,9 +125,10 @@ app.listen(port, function () {
 
   console.log();
 
-   //var itcFeedNews = new ItcNewsFeed(typeItcFeed.news, 0);
-   //itcFeedNews.getNews();
-  
+   var itcFeedNews = new ItcNewsFeed(typeItcFeed.news, 0);
+   
+   itcFeedNews.getNews();
+
    //var itcFeedNews = new ItcNewsFeed(typeItcFeed.blogs, 0);
    //itcFeedNews.getNews();
 
