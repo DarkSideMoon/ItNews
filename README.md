@@ -14,6 +14,12 @@ With simple wrapper on `Express` server -> Adrin server
  * `Make friends with Node JS`
  * `Using Visual studio Code` - if you like visual studio code you can use it in app
  * `Node.js command prompt` - if you using node cmd go to log.js file and change path to file
+
+######Installation:
+ * `Install Visual Studio Code (VS Code)`
+ * `Run install.bat from external directory`
+ * `Run adrin.js file`
+ * `Have fun with news` :newspaper:
  
 ######Libs: 
  * `Node-schedule`
