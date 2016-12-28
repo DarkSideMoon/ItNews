@@ -1,8 +1,5 @@
 sudo: false
 language: node_js
-script: [
-    "travis-lint .travis.yml"
-]
 node_js:
   - "6"
   - "6.1"
