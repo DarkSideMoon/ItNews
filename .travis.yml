@@ -1,9 +1,7 @@
 sudo: false
 language: node_js
 script: [
-    "travis-lint .travis.yml",
-    "npm test",
-    "make codeclimate"
+    "travis-lint .travis.yml"
 ]
 node_js:
   - "6"
