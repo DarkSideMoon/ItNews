@@ -36,17 +36,46 @@ router.get('/signup', function(req, res, next) {
 */
 
 // ==============================================
-// 					ROUTING DATA
+// 					ROUTING DATA NEWS
 // ==============================================
 router.get('/api/itcnews/blog', function(req, res, next) {
     var itcFeedNews = new ItcNewsFeed('blogs', 0);
-    /*
-    itcFeedNews.getNewsAsync(function(data) {
+    itcFeedNews.getNews(function(data) {
         res.json(data);
     });
-    */
 });
 
+router.get('/api/itcnews/video', function(req, res, next) {
+    var itcFeedNews = new ItcNewsFeed('video', 0);
+    itcFeedNews.getNews(function(data) {
+        res.json(data);
+    });
+});
+
+router.get('/api/itcnews/stati', function(req, res, next) {
+    var itcFeedNews = new ItcNewsFeed('stati', 0);
+    itcFeedNews.getNews(function(data) {
+        res.json(data);
+    });
+});
+
+router.get('/api/itcnews/articles', function(req, res, next) {
+    var itcFeedNews = new ItcNewsFeed('articles', 0);
+    itcFeedNews.getNews(function(data) {
+        res.json(data);
+    });
+});
+
+router.get('/api/itcnews/news', function(req, res, next) {
+    var itcFeedNews = new ItcNewsFeed('news', 0);
+    itcFeedNews.getNews(function(data) {
+        res.json(data);
+    });
+});
+
+// ==============================================
+// 					ROUTING DATA WEATHER
+// ==============================================
 router.get('/api/weather', function(req, res, next) {
     wundergroundAPI.getWeatherConditions('Kyiv', function(data) {
         res.json(data);

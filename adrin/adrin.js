@@ -127,7 +127,11 @@ app.listen(port, function () {
 
    var itcFeedNews = new ItcNewsFeed(typeItcFeed.news, 0);
    
-   itcFeedNews.getNews();
+   itcFeedNews.getNews(function(data) {
+     data.forEach(function(item) {
+       console.log(item);
+     });
+    });
 
    //var itcFeedNews = new ItcNewsFeed(typeItcFeed.blogs, 0);
    //itcFeedNews.getNews();
