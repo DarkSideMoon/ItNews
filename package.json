@@ -4,7 +4,6 @@
   "description": "Simple it news server",
   "main": "adrin.js",
   "scripts": {
-    "test": "npm test"
   },
   "repository": {
     "type": "git",

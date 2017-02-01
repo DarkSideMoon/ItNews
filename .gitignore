@@ -83,3 +83,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+.idea/encodings.xml
+.idea/ItNews.iml
+.idea/jsLibraryMappings.xml
+.idea/workspace.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/misc.xml
