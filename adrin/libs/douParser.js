@@ -10,6 +10,7 @@ let douNewsUrl = 'https://dou.ua/';
 let typeOfNews = '';
 let countOfPages = 0;
 
+let that;
 let posts = [];
 var article = {
     source: '',
@@ -39,6 +40,7 @@ function DouNewsFeed(typeNewsFeed, countPages) {
     typeOfNews = typeNewsFeed;
     douNewsUrl += typeNewsFeed;
     countOfPages = countPages;
+    that = this;
 
     this.getInfo = () => {
         this.parseNewsFeed();
@@ -71,7 +73,7 @@ function DouNewsFeed(typeNewsFeed, countPages) {
             if (!error) {
                 var $ = cheerio.load(body); 
                 if(typeOfNews == 'lenta/') {
-                    this.parsePage($);
+                    that.parsePage($);
                 } else {
                     parseEventPage($);
                 }
@@ -84,7 +86,7 @@ function DouNewsFeed(typeNewsFeed, countPages) {
     /*
         Method to actually parsing news pages
     */
-    this.parsePage = ($) => {
+    that.parsePage = ($) => {
         $("div[class='b-lenta']").each(function(element, index) {
             let el = $(this); 
             let allPosts = el[0].children;
@@ -94,14 +96,14 @@ function DouNewsFeed(typeNewsFeed, countPages) {
                 
                 try {
                     if(i % 2 == 1) {
-                        this.parsePost(post);
+                        that.parsePost(post);
                     }
                 } catch (error) {
                     logger.error('Couldnt parse post: ' + i);
                 }
             }
         });
-        this.showNewsInfo(posts);
+        showNewsInfo(posts);
     };
 
     /*
@@ -159,7 +161,7 @@ function DouNewsFeed(typeNewsFeed, countPages) {
     /*
         Method for parsing posts
     */
-    this.parsePost = (post) => {
+    that.parsePost = (post) => {
         article = { };
     
         article.source = 'Dou.ua';
@@ -188,12 +190,11 @@ function DouNewsFeed(typeNewsFeed, countPages) {
     /*
         Method for showing info about post
     */
-    this.showNewsInfo = (posts) => {
+    function showNewsInfo(posts) {
         logger.info('Count of parse posts: ' + posts.length);
-        
         for (var i = 0, len = posts.length; i < len; i++) {
             logger.info('---------------------');
-            logger.info(posts[i].title);
+            logger.debug(posts[i].title);
             logger.info('Категория: ' + posts[i].category);
             logger.info('Автор: ' + posts[i].author);
             logger.info('---------------------');

@@ -124,7 +124,7 @@ app.listen(port, function () {
   scheduler.run(1);
 
   console.log();
-
+/*
    var itcFeedNews = new ItcNewsFeed(typeItcFeed.news, 0);
    
    itcFeedNews.getNews(function(data) {
@@ -132,7 +132,7 @@ app.listen(port, function () {
        console.log(item);
      });
     });
-
+*/
    //var itcFeedNews = new ItcNewsFeed(typeItcFeed.blogs, 0);
    //itcFeedNews.getNews();
 
@@ -142,8 +142,8 @@ app.listen(port, function () {
   //var news2 = new NewsParser(typeOfNews.reddit, typeOfHeadlines.top);
   //news2.getNews();
   
-   //var douNewsFeedNews = new DouNewsFeed(douNewsType.news, 2);
-   //douNewsFeedNews.getInfo();
+   var douNewsFeedNews = new DouNewsFeed(douNewsType.news, 1);
+   douNewsFeedNews.getInfo();
 
    //var douNewsFeedEvents = new DouNewsFeed(douNewsType.calendar, 2);
    //douNewsFeedEvents.getInfo();

@@ -1,6 +1,6 @@
 var winston = require('winston');
 winston.emitErrs = true;
-var ENV = process.env.NODE_ENV;
+var ENV = 'development'; //process.env.NODE_ENV;
 
 var logger = new winston.Logger({
     transports: [
