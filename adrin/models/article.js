@@ -17,6 +17,7 @@ let article = {
 };
 
 function Article(newsSource, title, href, category, timeCreating, author, imageSource, comments, views) {
+    this.article = { };
     this.article.newsSource = newsSource;
     this.article.title = title;
     this.article.category = category;
@@ -39,3 +40,5 @@ function Article(newsSource, title, href, category, timeCreating, author, imageS
         return this.article;
     }
 }
+
+module.exports = Article;

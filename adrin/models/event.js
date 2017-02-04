@@ -40,3 +40,5 @@ function Event(newsSource, title, href, time, imageSource, price, place, text, c
         return this.event;
     }
 }
+
+module.exports = Event;
