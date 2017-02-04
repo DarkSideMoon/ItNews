@@ -1,18 +1,20 @@
 'use strict';
-
+// Constants
 const DouUrl = 'https://dou.ua/';
 
+// Libs
 let cheerio = require('cheerio');
 let request = require('request');
 let logger = require('./log');
 
+// Variables
 let douNewsUrl = 'https://dou.ua/';
 let typeOfNews = '';
 let countOfPages = 0;
 
 let that;
 let posts = [];
-var article = {
+let article = {
     source: '',
     title: '',
     href: '',
@@ -24,7 +26,7 @@ var article = {
     views: 0 
 };
 
-var event = {
+let event = {
     source: '',
     title: '',
     href: '',
