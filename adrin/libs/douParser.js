@@ -120,16 +120,16 @@ function DouNewsFeed(typeNewsFeed, countPages) {
         let comments = '';
         let source = 'Dou.ua';
         let href = post.children[1].children[1].attribs.href;
-        let title = post.children[3].children[1].children[1].attribs.alt;
-        let imageSource = post.children[3].children[1].children[1].attribs.src;
+        let title = post.children[1].children[1].children[1].attribs.alt;
+        let imageSource = post.children[1].children[1].children[1].attribs.src;
 
-        let time = post.children[1].children[1].children[0].data;
+        let time = post.children[3].children[1].children[0].data;
         let text = post.children[5].children[0].data.replace(/(\r\n|\n|\r|\t)/gm, ''); // replace for getting only text data
 
         // Ситуация когда нету коментариев или цены
         try {
-            place = post.children[1].children[2].data.replace(/(\r\n|\n|\r|\t)/gm, '');
-            price = post.children[1].children[3].children[0].data.replace(/(\r\n|\n|\r|\t)/gm, '');
+            place = post.children[3].children[2].data.replace(/(\r\n|\n|\r|\t)/gm, '');
+            price = post.children[3].children[3].children[0].data.replace(/(\r\n|\n|\r|\t)/gm, '');
             comments = post.children[5].children[1].children[0].data;
         } catch(error) {
             if(price == undefined)  {
@@ -190,6 +190,7 @@ function DouNewsFeed(typeNewsFeed, countPages) {
         logger.info('Count of parse posts: ' + posts.length);
         for (var i = 0, len = posts.length; i < len; i++) {
             logger.info(posts[i].getEventInfo());
+            logger.debug('---------------------');
         }
     };
 }

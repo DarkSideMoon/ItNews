@@ -17,6 +17,7 @@ let event = {
 };
 
 function Event(newsSource, title, href, time, imageSource, price, place, text, comments) {
+    this.event = { };
     this.event.newsSource = newsSource;
     this.event.title = title;
     this.event.href = href;
