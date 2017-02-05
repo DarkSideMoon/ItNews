@@ -143,8 +143,8 @@ app.listen(port, function () {
   //var news2 = new NewsParser(typeOfNews.reddit, typeOfHeadlines.top);
   //news2.getNews();
   
-   var douNewsFeedNews = new DouNewsFeed(douNewsType.calendar, 1);
-   douNewsFeedNews.getInfo();
+   //var douNewsFeedNews = new DouNewsFeed(douNewsType.calendar, 1);
+   //douNewsFeedNews.getInfo();
 
    //var douNewsFeedEvents = new DouNewsFeed(douNewsType.calendar, 2);
    //douNewsFeedEvents.getInfo();

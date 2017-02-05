@@ -22,17 +22,18 @@ function DouNewsFeed(typeNewsFeed, countPages) {
     douNewsUrl += typeNewsFeed;
     countOfPages = countPages;
     that = this;
+    posts = []; // Clear arrary of news or events
 
-    that.getInfo = () => {
-        that.parseNewsFeed();
+    that.getInfo = (callback) => {
+        that.parseNewsFeed(callback);
     };
 
     /*
         Method to parse news or events
     */
-    that.parseNewsFeed = () => {
+    that.parseNewsFeed = (callback) => {
         if(countOfPages == 0) {
-            that.getWebPage();
+            that.getWebPage(callback);
         } else {
             for (var i = 1, len = countOfPages; i <= len; i++) {
                 if(typeOfNews == 'lenta/') {
@@ -40,7 +41,7 @@ function DouNewsFeed(typeNewsFeed, countPages) {
                 } else {
                     douNewsUrl += 'page-' + i + '/';
                 }
-                that.getWebPage();
+                that.getWebPage(callback);
                 douNewsUrl = DouUrl + typeNewsFeed;
             }
         }
@@ -49,14 +50,14 @@ function DouNewsFeed(typeNewsFeed, countPages) {
     /*
         Method for getting body of page to parse
     */
-    that.getWebPage = () => {
+    that.getWebPage = (callback) => {
         request(douNewsUrl, function (error, response, body) {
             if (!error) {
                 let $ = cheerio.load(body); 
                 if(typeOfNews == 'lenta/') {
-                    that.parsePage($);
+                    that.parsePage($, callback);
                 } else {
-                    that.parseEventPage($);
+                    that.parseEventPage($, callback);
                 }
             } else {
                 console.log("Error: " + error);
@@ -67,7 +68,7 @@ function DouNewsFeed(typeNewsFeed, countPages) {
     /*
         Method to actually parsing news pages
     */
-    that.parsePage = ($) => {
+    that.parsePage = ($, callback) => {
         $("div[class='b-lenta']").each(function(element, index) {
             let el = $(this); 
             let allPosts = el[0].children;
@@ -85,13 +86,18 @@ function DouNewsFeed(typeNewsFeed, countPages) {
                 }
             }
         });
-        that.showNewsInfo(posts);
+        //that.showNewsInfo(posts);
+        
+        if(callback !== null)
+            callback(posts);
+        
+        return posts;
     };
 
     /*
         Method to actually parsing event pages
     */
-    that.parseEventPage = ($) => {
+    that.parseEventPage = ($, callback) => {
         $("div[class='col50 m-cola']").each(function(element, index, callback) {
             let el = $(this); 
             let allPosts = el[0].children;
@@ -108,7 +114,12 @@ function DouNewsFeed(typeNewsFeed, countPages) {
                 }
             }
         });
-        that.showEventInfo(posts);
+        //that.showEventInfo(posts);
+        
+        if(callback !== null)
+            callback(posts);
+        
+        return posts;
     };
 
     /*
