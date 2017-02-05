@@ -50,7 +50,7 @@ var bodyParser = require('body-parser');
 var logger = require('./libs/log');
 var wunderground = require('./libs/wunParser');
 var wundergroundAPI = require('./libs/weatherModule');
-var scheduler = require('./libs/scheduler');
+var Scheduler = require('./libs/scheduler');
 
 // Parsers
 var ItcNewsFeed = require('./libs/itcFeedParser');
@@ -121,7 +121,8 @@ app.listen(port, function () {
 
   //wunderground.getWundergroundWeather();
 
-  scheduler.run(1);
+  var scheduler = new Scheduler('*/30 * * * * *');
+  scheduler.runTaskWorker();;
 
   console.log();
 /*

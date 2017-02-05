@@ -1,30 +1,39 @@
-var wundergroundAPI = require('./weatherModule');
-var cron = require('cron');
+'use strict';
+
+// Libs
+let Weather = require('./weatherModule');
+let cron = require('cron');
+let that;
+let jobInterval = '';
 
 // info
 // http://stackoverflow.com/questions/20499225/i-need-a-nodejs-scheduler-that-allows-for-tasks-at-different-intervals
+function Scheduler(interval) {
+    that = this;
+    this.jobInterval = interval;
 
-function taskWorker(params) {
-    var cronJob = cron.job('*/30 * * * * *', function(){
-        // perform operation e.g. GET request http.get() etc.
-        console.info('cron job completed');
+    that.runTaskWorker = () => {
+        var cronJob = cron.job(this.jobInterval, function(){
+            // perform operation e.g. GET request http.get() etc.
+            console.info('cron job completed');
+            that.getWeather();
+        }); 
         
-        getWeather();
-    }); 
-    
-    cronJob.start();
-};
+        cronJob.start();
+    };
 
-function getWeather() {
-    wundergroundAPI.getWeatherConditions('Kyiv', function(data) {
-        console.log('***********************WEATHER****************************');
-        console.log("Weather in " + data.fullName);
-        console.log(data.observation_time);
-        console.log("Temperature " + data.weather.tempC + " celsius");
-        console.log("Pressure " + data.weather.pressure_mb );
-        console.log("Conditions " + data.weather.condition);
-        console.log('**********************************************************');
-    });
-};
+    that.getWeather = () => {
+        let weather = new Weather('Kyiv');
+        weather.getWeatherConditions(function(data) {
+            console.log('***********************WEATHER****************************');
+            console.log("Weather in " + data.fullName);
+            console.log(data.observation_time);
+            console.log("Temperature " + data.weather.tempC + " celsius");
+            console.log("Pressure " + data.weather.pressure_mb );
+            console.log("Conditions " + data.weather.condition);
+            console.log('**********************************************************');
+        });
+    };
+}
  
-module.exports.run = taskWorker;
+module.exports = Scheduler;
