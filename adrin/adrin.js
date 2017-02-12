@@ -54,8 +54,10 @@ var Scheduler = require('./libs/scheduler');
 
 // Parsers
 var ItcNewsFeed = require('./libs/itcFeedParser');
-var NewsParser = require('./libs/newsParser');
 var DouNewsFeed = require('./libs/douParser');
+var CodeGuidaParser = require('./libs/codeguidaParser');
+var NewsParser = require('./libs/newsParser');
+
 
 // ROUTES 
 var routes = require('./routes/index');
@@ -123,8 +125,16 @@ app.listen(port, function () {
 
   var scheduler = new Scheduler('*/30 * * * * *');
   scheduler.runTaskWorker();;
-
   console.log();
+
+  var codeguidaParser = new CodeGuidaParser('it_news', 0);
+  codeguidaParser.getNews(function(data) {
+    data.forEach(function(item) {
+      logger.debug(item);
+    });
+  });
+
+
 /*
    var itcFeedNews = new ItcNewsFeed(typeItcFeed.news, 0);
    
@@ -144,9 +154,9 @@ app.listen(port, function () {
   //news2.getNews();
   
    //var douNewsFeedNews = new DouNewsFeed(douNewsType.calendar, 1);
-   //douNewsFeedNews.getInfo();
+   //douNewsFeedNews.getNews();
 
    //var douNewsFeedEvents = new DouNewsFeed(douNewsType.calendar, 2);
-   //douNewsFeedEvents.getInfo();
+   //douNewsFeedEvents.getNews();
 
 });

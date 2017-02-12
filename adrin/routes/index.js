@@ -74,7 +74,7 @@ router.get('/api/itcnews/news', function(req, res, next) {
 // ==============================================
 router.get('/api/dounews/news', function(req, res, next) {
     let douNewsFeedNews = new DouNewsFeed('lenta/', 0);
-    douNewsFeedNews.getInfo(function(data) {
+    douNewsFeedNews.getNews(function(data) {
         res.json(data);
     });
 });
@@ -84,7 +84,7 @@ router.get('/api/dounews/news', function(req, res, next) {
 // ==============================================
 router.get('/api/dounews/events', function(req, res, next) {
     let douNewsFeedNews = new DouNewsFeed('calendar/', 0);
-    douNewsFeedNews.getInfo(function(data) {
+    douNewsFeedNews.getNews(function(data) {
         res.json(data);
     });
 });

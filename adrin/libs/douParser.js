@@ -24,7 +24,7 @@ function DouNewsFeed(typeNewsFeed, countPages) {
     that = this;
     posts = []; // Clear arrary of news or events
 
-    that.getInfo = (callback) => {
+    that.getNews = (callback) => {
         that.parseNewsFeed(callback);
     };
 

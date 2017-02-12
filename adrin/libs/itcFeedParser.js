@@ -29,10 +29,14 @@ function ItcNewsFeed(typeFeed, countPages) {
     tmFeedUrl += typeFeed;
     countOfPages = countPages;
 
+    that.getNews = (callback) => {
+        that.parseNewsFeed(callback);
+    };
+
     /*
         Method for getting news from web site
     */
-    this.getNews = (callback) => {
+    this.parseNewsFeed = (callback) => {
         if(countOfPages == 0) {
             getWebPage(callback);
         } else {
