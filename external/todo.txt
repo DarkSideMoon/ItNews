@@ -1,0 +1,2 @@
+1. Create cool REST API - to get news and i can senscribe on news.
+2. Create mail sender service to send mails for users -> think about it, because it can be spam.

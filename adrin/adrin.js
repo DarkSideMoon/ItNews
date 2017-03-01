@@ -127,12 +127,17 @@ app.listen(port, function () {
   scheduler.runTaskWorker();;
   console.log();
 
+/*
   var codeguidaParser = new CodeGuidaParser('it_news', 0);
   codeguidaParser.getNews(function(data) {
     data.forEach(function(item) {
-      logger.debug(item);
+      logger.debug(item.getArticleInfo());
     });
   });
+*/
+
+  var codeguidaParser = new CodeGuidaParser('it_news', 0);
+  codeguidaParser.getNews();
 
 
 /*

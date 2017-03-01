@@ -179,7 +179,7 @@ function DouNewsFeed(typeNewsFeed, countPages) {
         }
         let category = post.children[7].children[1].children[0].data;
         
-        let article = new Article(source, title, href, category, timeCreating, author, imageSource, comments, views);
+        let article = new Article(source, title, href, category, timeCreating, author, imageSource, comments, views, 0);
         posts.push(article);
     };
 

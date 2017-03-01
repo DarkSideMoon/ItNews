@@ -13,10 +13,11 @@ let article = {
     author: '',
     imageSource: '',
     comments: 0,
-    views: 0 
+    views: 0,
+    likes: 0 
 };
 
-function Article(newsSource, title, href, category, timeCreating, author, imageSource, comments, views) {
+function Article(newsSource, title, href, category, timeCreating, author, imageSource, comments, views, likes) {
     this.article = { };
     this.article.newsSource = newsSource;
     this.article.title = title;
@@ -26,6 +27,7 @@ function Article(newsSource, title, href, category, timeCreating, author, imageS
     this.article.imageSource = imageSource;
     this.article.comments = comments;
     this.article.views = views;
+    this.article.likes = likes;
     that = this;
 
     that.getArticleInfo = () => {
