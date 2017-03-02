@@ -5,6 +5,7 @@ const FeedUrl = 'http://itc.ua/';
 let request = require('request');
 let cheerio = require('cheerio');
 let logger = require('./log');
+let that;
 
 let tmFeedUrl = 'http://itc.ua/';
 let countOfPages = 0;
@@ -28,6 +29,7 @@ let article = {
 function ItcNewsFeed(typeFeed, countPages) {
     tmFeedUrl += typeFeed;
     countOfPages = countPages;
+    that = this;
 
     that.getNews = (callback) => {
         that.parseNewsFeed(callback);
@@ -36,13 +38,13 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for getting news from web site
     */
-    this.parseNewsFeed = (callback) => {
+    that.parseNewsFeed = (callback) => {
         if(countOfPages == 0) {
-            getWebPage(callback);
+            that.getWebPage(callback);
         } else {
             for (var i = 0, len = countOfPages; i <= len; i++) {
                 tmFeedUrl += '/page/' + i;
-                getWebPage(callback);
+                that.getWebPage(callback);
                 // Something to do
                 tmFeedUrl = FeedUrl + typeFeed;
             }
@@ -52,11 +54,11 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for getting page html code
     */
-    function getWebPage(callback) {
+    that.getWebPage = (callback) => {
         request(tmFeedUrl, function (error, response, body) {
             if (!error) {
                 var $ = cheerio.load(body); 
-                parsePage($, callback);   
+                that.parsePage($, callback);   
             } else {
                 console.log("Error: " + error);
             }
@@ -67,7 +69,7 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for parsing each of post on array
     */    
-    function parsePage($, callback) {
+    that.parsePage = ($, callback) => {
         $("main[id='content']").each(function(element, index) {
             let el = $(this); 
             let allPosts = el[0].children;
@@ -77,7 +79,7 @@ function ItcNewsFeed(typeFeed, countPages) {
                 
                 try {
                     if(i % 2 == 0 || i == 0) {
-                        parsePost(post);
+                        that.parsePost(post);
                     }
                 } catch (error) {
                     logger.error('Couldnt parse post: ' + i);
@@ -85,7 +87,7 @@ function ItcNewsFeed(typeFeed, countPages) {
             }
         });
         
-        showInfo(posts);
+        that.showInfo(posts);
         
         if(callback != null)
             callback(posts);
@@ -96,7 +98,7 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for parsing post data
     */
-    function parsePost(post) {
+    that.parsePost = (post) => {
         article = { };
         
         article.source = 'Itc.ua';
@@ -115,7 +117,7 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for showing info about post
     */
-    function showInfo(posts) {
+    that.showInfo = (posts) => {
         logger.info('Count of parse posts: ' + posts.length);
         
         for (var i = 0, len = posts.length; i < len; i++) {

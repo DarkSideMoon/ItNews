@@ -136,11 +136,9 @@ app.listen(port, function () {
   });
 */
 
-  var codeguidaParser = new CodeGuidaParser('it_news', 0);
-  codeguidaParser.getNews();
+  //var codeguidaParser = new CodeGuidaParser('it_news', 0);
+  //codeguidaParser.getNews();
 
-
-/*
    var itcFeedNews = new ItcNewsFeed(typeItcFeed.news, 0);
    
    itcFeedNews.getNews(function(data) {
@@ -148,7 +146,6 @@ app.listen(port, function () {
        console.log(item);
      });
     });
-*/
    //var itcFeedNews = new ItcNewsFeed(typeItcFeed.blogs, 0);
    //itcFeedNews.getNews();
 
