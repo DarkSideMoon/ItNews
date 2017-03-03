@@ -1,6 +1,7 @@
 'user strict';
 // Constant
 const codeguida = 'https://codeguida.com';
+const newsUrl = 'https://codeguida.com/category/';
 
 // Libs
 let cheerio = require('cheerio');
@@ -9,7 +10,7 @@ let logger = require('./log');
 let Article = require('../models/article');
 
 // Variables
-let codeguidaNewsUrl = 'https://codeguida.com/category/';
+let codeguidaNewsUrl = '';
 let typeOfNews = '';
 let countOfPages = 0;
 
@@ -18,6 +19,7 @@ let posts = [];
 
 function CodeGuidaNewsFeed(typeNewsFeed, countPages) {
     typeOfNews = typeNewsFeed;
+    codeguidaNewsUrl = newsUrl;
     codeguidaNewsUrl += typeNewsFeed;
     countOfPages = countPages;
     that = this;
@@ -76,7 +78,8 @@ function CodeGuidaNewsFeed(typeNewsFeed, countPages) {
         
         if(callback !== null && typeof callback !== 'undefined')
             callback(posts);
-        
+
+        codeguidaNewsUrl = '';
         return posts;
     };
 

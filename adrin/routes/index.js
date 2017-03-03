@@ -8,6 +8,7 @@ let router = express.Router();
 let ItcNewsFeed = require('./../libs/itcFeedParser');
 let Weather = require('./../libs/weatherModule');
 let DouNewsFeed = require('./../libs/douParser');
+let CodeGuidaParser = require('./../libs/codeguidaParser');
 
 // ==============================================
 // 					ROUTING VIEWS
@@ -95,6 +96,24 @@ router.get('/api/dounews/events', function(req, res, next) {
 router.get('/api/weather', function(req, res, next) {
     let weather = new Weather('Kyiv');
     weather.getWeatherConditions(function(data) {
+        res.json(data);
+    });
+});
+
+
+// ==============================================
+// 					ROUTING DATA CODEGUIDA NEWS
+// ==============================================
+router.get('/api/codeguidanews/programming', function(req, res, next) {
+    var codeguidaParser = new CodeGuidaParser('programming', 0);
+    codeguidaParser.getNews(function(data){
+        res.json(data);
+    });
+});
+
+router.get('/api/codeguidanews/it_news', function(req, res, next) {
+    var codeguidaParser = new CodeGuidaParser('it_news', 0);
+    codeguidaParser.getNews(function(data){
         res.json(data);
     });
 });
