@@ -26,33 +26,7 @@
 
 
 <link rel="stylesheet" href="assets/style.css">
-
-<script src="http://code.jquery.com/jquery-1.9.1.min.js">
-$(document).ready(function () {
-  //$('#get-data').click(function () {
-    var showData = $('#show-data');
-
-    $.getJSON('http://localhost:3000/api/codeguidanews/programming', function (data) {
-      console.log(data);
-
-      var items = data.items.map(function (item) {
-        return item.key + ': ' + item.value;
-      });
-
-      showData.empty();
-
-      if (items.length) {
-        var content = '<li>' + items.join('</li><li>') + '</li>';
-        var list = $('<ul />').html(content);
-        showData.append(list);
-      }
-    });
-
-    showData.text('Loading the JSON file.');
-  //});
-});
-</script>
-
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 </head>
 
@@ -107,7 +81,7 @@ $(document).ready(function () {
   <div class="row">
   <div class="col-sm-6 wowload fadeInLeft">
     <h4><i class="fa fa-paint-brush"></i> Design</h4>
-    <p id="show-data"> 
+    <p class="news-info"> 
     </p>
     
 
@@ -145,6 +119,7 @@ Copyright 2016. It news parser + Adrin server. All rights reserved.
 
 <!-- custom script -->
 <script src="assets/script.js"></script>
+<script src="assets/clientRoute.js"></script>
 
 </body>
 </html>

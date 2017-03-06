@@ -123,9 +123,9 @@ app.listen(port, function () {
 
   //wunderground.getWundergroundWeather();
 
-  var scheduler = new Scheduler('*/30 * * * * *');
-  scheduler.runTaskWorker();;
-  console.log();
+  //var scheduler = new Scheduler('*/30 * * * * *');
+  //scheduler.runTaskWorker();;
+  //console.log();
 
 /*
   var codeguidaParser = new CodeGuidaParser('it_news', 0);
