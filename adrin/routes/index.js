@@ -32,6 +32,12 @@ router.get('/install', function(req, res, next) {
     res.render(pathToFile);
 });
 
+/* GET page of news */
+router.get('/news', function(req, res, next) {
+	let pathToFile = __dirname + '/../views/news.html';
+    res.render(pathToFile);
+});
+
 // ==============================================
 // 					ROUTING DATA ITC NEWS
 // ==============================================
