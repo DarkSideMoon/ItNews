@@ -6,8 +6,8 @@ const DouUrl = 'https://dou.ua/';
 let cheerio = require('cheerio');
 let request = require('request');
 let logger = require('./log');
-let Article = require('../models/article');
-let Event = require('../models/event');
+let Article = require('../model/article');
+let Event = require('../model/event');
 
 // Variables
 let douNewsUrl = 'https://dou.ua/';

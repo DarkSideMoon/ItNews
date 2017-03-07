@@ -28,6 +28,7 @@ function Article(newsSource, title, href, category, timeCreating, author, imageS
     this.article.comments = comments;
     this.article.views = views;
     this.article.likes = likes;
+    this.article.href = href;
     that = this;
 
     that.getArticleInfo = () => {

@@ -7,7 +7,7 @@ const newsUrl = 'https://codeguida.com/category/';
 let cheerio = require('cheerio');
 let request = require('request');
 let logger = require('./log');
-let Article = require('../models/article');
+let Article = require('../model/article');
 
 // Variables
 let codeguidaNewsUrl = '';
