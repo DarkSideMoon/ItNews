@@ -33,10 +33,25 @@ router.get('/install', function(req, res, next) {
 });
 
 /* GET page of news */
-router.get('/news', function(req, res, next) {
+router.get('/news?:name?:type', function(req, res, next) {
 	let pathToFile = __dirname + '/../views/news.html';
+    let test1 = req.route;
+    let test2 = req.query.name;
     res.render(pathToFile);
 });
+
+/* GET page of news */
+/*
+TODO: make with two parameters
+-------------Can work with this two params but actually doesn't load css styles. Why???---------- 
+router.get('/news/:name/:type', function(req, res, next) {
+	let pathToFile = __dirname + '/../views/news.html';
+    let test1 = req.route;
+    let test2 = req.params.name;
+    let test3 = req.params.type;
+    res.render(pathToFile);
+});
+*/
 
 // ==============================================
 // 					ROUTING DATA ITC NEWS

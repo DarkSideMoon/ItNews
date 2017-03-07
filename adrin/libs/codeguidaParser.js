@@ -87,7 +87,7 @@ function CodeGuidaNewsFeed(typeNewsFeed, countPages) {
         Method for parsing posts
     */
     that.parsePost = (post) => {
-        let source = 'Codeguida.com';
+        let source = codeguida;
         
         let imageSource = codeguida + post.children[1].children[1].children[1].children[1].attribs.src;
         let title = post.children[1].children[3].children[0].children[0].data;
