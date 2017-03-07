@@ -61,9 +61,34 @@ jQuery(document).ready(function($) {
         });
     };
 
+    /*
+        Codeguida news
+    */
     if(arr[0] === 'codeguida' && arr[1] === 'programming') {
         getNews('codeguidanews/programming');
     } else if(arr[0] === 'codeguida' && arr[1] === 'it_news') {
         getNews('codeguidanews/it_news');
+    }
+    
+    /*
+        Itc news
+    */
+    if(arr[0] === 'itcnews' && arr[1] === 'blog') {
+        getNews('itcnews/blog');
+    } else if(arr[0] === 'itcnews' && arr[1] === 'video') {
+        getNews('itcnews/video');
+    } else if(arr[0] === 'itcnews' && arr[1] === 'stati') {
+        getNews('itcnews/stati');
+    } else if(arr[0] === 'itcnews' && arr[1] === 'articles') {
+        getNews('itcnews/articles');
+    } else if(arr[0] === 'itcnews' && arr[1] === 'news') {
+        getNews('itcnews/news');
+    }
+    
+    /*
+        Dou news
+    */
+    if(arr[0] === 'dou' && arr[1] === 'news') {
+        getNews('dounews/news');
     }
 });
