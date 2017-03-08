@@ -52,6 +52,10 @@ var wunderground = require('./libs/wunParser');
 var wundergroundAPI = require('./libs/weatherModule');
 var Scheduler = require('./libs/scheduler');
 
+// Mongo DB
+var MongoManager = require('./mongodb/mongoManager'); 
+
+
 // Parsers
 var ItcNewsFeed = require('./libs/itcFeedParser');
 var DouNewsFeed = require('./libs/douParser');
@@ -120,6 +124,10 @@ app.use(function(err, req, res, next) {
 // ==============================================
 app.listen(port, function () {
   console.log(`Server running at http://${hostname}:${port}/`);
+  
+  var managerDb = new MongoManager();
+  console.log(`Check Mondo DB connection`);
+  managerDb.checkConnection();
 
   //wunderground.getWundergroundWeather();
 

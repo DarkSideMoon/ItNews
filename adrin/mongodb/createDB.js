@@ -1,4 +1,4 @@
-var mongoose = require('lib/mongoose');
+var mongoose = require('mongoose');
 // для работы в с фун-ми и callback
 // позволяет делать async последовательности вызовов:
 // серийные, паралельные, работает с масивами

@@ -28,6 +28,7 @@ npm install googleapis --save
 npm install cheerio --save 
 npm install request --save 
 npm install wundergroundnode -- save
+npm install mongodb --save
 
 @echo Install all libs _for testing?
 

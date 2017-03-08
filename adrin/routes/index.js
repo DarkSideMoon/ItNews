@@ -10,6 +10,8 @@ let Weather = require('./../libs/weatherModule');
 let DouNewsFeed = require('./../libs/douParser');
 let CodeGuidaParser = require('./../libs/codeguidaParser');
 
+let MongoManager = require('./../mongodb/mongoManager'); 
+
 // ==============================================
 // 					ROUTING VIEWS
 // ==============================================
@@ -52,6 +54,17 @@ router.get('/news/:name/:type', function(req, res, next) {
     res.render(pathToFile);
 });
 */
+
+// ==============================================
+// 					ROUTING USERS
+// ==============================================
+router.get('/api/user/info?:id', function(req, res, next) {
+    let id = req.query.id;
+
+    let managerDb = new MongoManager();
+    res.render('');
+});
+
 
 // ==============================================
 // 					ROUTING DATA ITC NEWS
