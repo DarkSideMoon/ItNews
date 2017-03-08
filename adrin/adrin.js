@@ -127,7 +127,8 @@ app.listen(port, function () {
   
   var managerDb = new MongoManager();
   console.log(`Check Mondo DB connection`);
-  managerDb.checkConnection();
+  //managerDb.checkConnection();
+  managerDb.getUsers();
 
   //wunderground.getWundergroundWeather();
 

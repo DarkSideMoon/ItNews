@@ -1,61 +1,35 @@
-var crypto = require('crypto');
+// ==============================================
+// 		       Model class for user
+// ==============================================
+'use strict';
 
-var mongoose = require('lib/mongoose'),
-    Schema = mongoose.Schema;
+let that;
+let user = {
+    name: '',
+    email: '',
+    created: Date,
+    subscriptions: []
+};
 
-var schema = new Schema({
-    nick:{
-        type:String,
-        // trim - убирает пробелы
-        trim: true,
-        unique: true,
-        required: true
-    },
-    hashedPassword: {
-        type: String,
-        required: true
-    },
-    salt: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        trim: true,
-        unique: true,
-        required: false,//true,
-        match: [/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please fill a valid email address']
-    },
-    created: {
-        type: Date,
-        default: Date.now
-    },
-    rights: {
-        type: String,
-        default: 'basic'
+function User(name, email, created, subscriptions) {
+    this.user = { };
+    this.user.name = name;
+    this.user.email =email;
+    this.user.created = created;
+    this.user.subscriptions = subscriptions;
+
+    that = this;
+
+    that.getUserInfo = () => {
+        return this.user.name +
+        '\nEmail: ' + this.user.email + 
+        '\nCreated: ' + this.user.created + 
+        '\nSubscriptions: ' + this.user.subscriptions;
     }
-});
 
-schema.methods.encryptPassword = function (password) {
-    return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
-};
+    that.getUser = () => {
+        return this.user;
+    }
+}
 
-schema.virtual('password')
-    .set(function (password) {
-        this._plainPassword = password;
-        this.salt = Math.random() + '';
-        this.hashedPassword = this.encryptPassword(password);
-    })
-    .get(function () { return this._plainPassword; });
-
-schema.methods.checkPassword = function (password) {
-    return this.encryptPassword(password) === this.hashedPassword;
-};
-
-schema.methods.validateEmail = function(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email)
-};
-
-exports.User = mongoose.model('User', schema);
-
+module.exports = User;
