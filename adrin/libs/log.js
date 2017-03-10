@@ -1,8 +1,10 @@
-var winston = require('winston');
-winston.emitErrs = true;
-var ENV = process.env.NODE_ENV;
+'use strict';
 
-var logger = new winston.Logger({
+let winston = require('winston');
+winston.emitErrs = true;
+let ENV = 'development'; //process.env.NODE_ENV;
+
+let logger = new winston.Logger({
     transports: [
         new winston.transports.File({
             level: 'silly',

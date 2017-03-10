@@ -50,12 +50,18 @@ var bodyParser = require('body-parser');
 var logger = require('./libs/log');
 var wunderground = require('./libs/wunParser');
 var wundergroundAPI = require('./libs/weatherModule');
-var scheduler = require('./libs/scheduler');
+var Scheduler = require('./libs/scheduler');
+
+// Mongo DB
+var MongoManager = require('./mongodb/mongoManager'); 
+
 
 // Parsers
 var ItcNewsFeed = require('./libs/itcFeedParser');
-var NewsParser = require('./libs/newsParser');
 var DouNewsFeed = require('./libs/douParser');
+var CodeGuidaParser = require('./libs/codeguidaParser');
+var NewsParser = require('./libs/newsParser');
+
 
 // ROUTES 
 var routes = require('./routes/index');
@@ -118,13 +124,34 @@ app.use(function(err, req, res, next) {
 // ==============================================
 app.listen(port, function () {
   console.log(`Server running at http://${hostname}:${port}/`);
+  
+  var managerDb = new MongoManager();
+  console.log(`Check Mondo DB connection`);
+  //managerDb.checkConnection();
+  managerDb.getUsers();
 
   //wunderground.getWundergroundWeather();
 
-  scheduler.run(1);
+  //var scheduler = new Scheduler('*/30 * * * * *');
+  //scheduler.runTaskWorker();;
+  //console.log();
 
-  console.log();
+/*
+  var codeguidaParser = new CodeGuidaParser('it_news', 0);
+  codeguidaParser.getNews(function(data) {
+    data.forEach(function(item) {
+      logger.debug(item.getArticleInfo());
+    });
+  });
+*/
 
+  //var codeguidaParser = new CodeGuidaParser('it_news', 0);
+  //codeguidaParser.getNews();
+  
+  //var codeguidaParser = new CodeGuidaParser('programming', 0);
+  //codeguidaParser.getNews();
+
+/*
    var itcFeedNews = new ItcNewsFeed(typeItcFeed.news, 0);
    
    itcFeedNews.getNews(function(data) {
@@ -132,7 +159,7 @@ app.listen(port, function () {
        console.log(item);
      });
     });
-
+*/
    //var itcFeedNews = new ItcNewsFeed(typeItcFeed.blogs, 0);
    //itcFeedNews.getNews();
 
@@ -142,10 +169,10 @@ app.listen(port, function () {
   //var news2 = new NewsParser(typeOfNews.reddit, typeOfHeadlines.top);
   //news2.getNews();
   
-   //var douNewsFeedNews = new DouNewsFeed(douNewsType.news, 2);
-   //douNewsFeedNews.getInfo();
+   //var douNewsFeedNews = new DouNewsFeed(douNewsType.calendar, 1);
+   //douNewsFeedNews.getNews();
 
    //var douNewsFeedEvents = new DouNewsFeed(douNewsType.calendar, 2);
-   //douNewsFeedEvents.getInfo();
+   //douNewsFeedEvents.getNews();
 
 });

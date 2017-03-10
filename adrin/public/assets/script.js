@@ -26,7 +26,7 @@ wow.init();
 
 
 
-
+/*
 $('.carousel').swipe( {
      swipeLeft: function() {
          $(this).carousel('next');
@@ -36,6 +36,4 @@ $('.carousel').swipe( {
      },
      allowPageScroll: 'vertical'
  });
-
-
-
+*/

@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "description": "Simple it news server",
   "main": "adrin.js",
-  "scripts": {
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/DarkSideMoon/ItNews.git"
@@ -12,19 +10,24 @@
   "license": "MIT",
   "author": "Romashchenko Pavel (GreenOwl)",
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "async": "^2.1.4",
+    "body-parser": "^1.16.0",
     "cheerio": "^0.22.0",
     "cookie-parser": "^1.4.3",
-    "cron": "^1.1.1",
-    "ejs": "^2.5.2",
-    "express": "^4.14.0",
+    "cron": "^1.2.1",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1",
+    "googleapis": "^16.1.0",
     "jade": "^1.11.0",
     "mocha": "^3.2.0",
     "morgan": "^1.7.0",
+    "nodemailer": "^3.0.0",
+    "nodemailer-smtp-transport": "^2.7.2",
     "request": "^2.79.0",
-    "serve-favicon": "^2.3.0",
+    "serve-favicon": "^2.3.2",
     "should": "^11.1.1",
-    "winston": "^2.3.0"
+    "winston": "^2.3.1",
+    "xoauth2": "^1.2.0"
   },
   "devDependencies": {
     "supertest": "^2.0.1"

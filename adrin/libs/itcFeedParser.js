@@ -5,22 +5,12 @@ const FeedUrl = 'http://itc.ua/';
 let request = require('request');
 let cheerio = require('cheerio');
 let logger = require('./log');
+let that;
 
 let tmFeedUrl = 'http://itc.ua/';
 let countOfPages = 0;
 let posts = [];
-let article = {
-    id: '',
-    source: '',
-    title: '',
-    href: '',
-    category: '',
-    timeCreating: '',
-    author: '',
-    comments: 0,
-    views: 0,
-    rating: 0
-};
+let Article = require('../model/article');
     
 /*
     Object of ItcNewsFeed 
@@ -28,17 +18,22 @@ let article = {
 function ItcNewsFeed(typeFeed, countPages) {
     tmFeedUrl += typeFeed;
     countOfPages = countPages;
+    that = this;
+
+    that.getNews = (callback) => {
+        that.parseNewsFeed(callback);
+    };
 
     /*
         Method for getting news from web site
     */
-    this.getNews = (callback) => {
+    that.parseNewsFeed = (callback) => {
         if(countOfPages == 0) {
-            getWebPage(callback);
+            that.getWebPage(callback);
         } else {
             for (var i = 0, len = countOfPages; i <= len; i++) {
                 tmFeedUrl += '/page/' + i;
-                getWebPage(callback);
+                that.getWebPage(callback);
                 // Something to do
                 tmFeedUrl = FeedUrl + typeFeed;
             }
@@ -48,11 +43,11 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for getting page html code
     */
-    function getWebPage(callback) {
+    that.getWebPage = (callback) => {
         request(tmFeedUrl, function (error, response, body) {
             if (!error) {
                 var $ = cheerio.load(body); 
-                parsePage($, callback);   
+                that.parsePage($, callback);   
             } else {
                 console.log("Error: " + error);
             }
@@ -63,7 +58,7 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for parsing each of post on array
     */    
-    function parsePage($, callback) {
+    that.parsePage = ($, callback) => {
         $("main[id='content']").each(function(element, index) {
             let el = $(this); 
             let allPosts = el[0].children;
@@ -73,15 +68,16 @@ function ItcNewsFeed(typeFeed, countPages) {
                 
                 try {
                     if(i % 2 == 0 || i == 0) {
-                        parsePost(post);
+                        that.parsePost(post);
                     }
                 } catch (error) {
                     logger.error('Couldnt parse post: ' + i);
+                    logger.error('Error: ' + error);
                 }
             }
         });
         
-        showInfo(posts);
+        that.showInfo(posts);
         
         if(callback != null)
             callback(posts);
@@ -92,35 +88,29 @@ function ItcNewsFeed(typeFeed, countPages) {
     /*
         Method for parsing post data
     */
-    function parsePost(post) {
-        article = { };
-        
-        article.source = 'Itc.ua';
-        article.id = post.attribs.class.match(/(post-)\d+/)[0];
-        article.imageSource = post.children[0].children[0].children[0].children[1].attribs['data-original'];
-        article.href = post.children[0].children[0].children[0].children[1].attribs.href;
-        article.title = post.children[0].children[2].children[0].children[0].children[0].data;
-        article.timeCreating = post.children[0].children[2].children[1].children[0].children[0].children[1].children[0].data;        
-        article.comments = post.children[0].children[2].children[1].children[0].children[2].children[1].children[0].children[0].data;
-        article.category = post.children[0].children[0].children[0].children[0].children[0].children[0].data;        
-        article.author = post.children[0].children[2].children[1].children[0].children[1].children[1].children[0].data;        
+    that.parsePost = (post) => {
+        let source = 'Itc.ua';
+        //let id = post.attribs.class.match(/(post-)\d+/)[0];
+        let imageSource = post.children[0].children[0].children[0].children[1].attribs['data-bg'];
+        let href = post.children[0].children[0].children[0].children[1].attribs.href;
+        let title = post.children[0].children[2].children[0].children[0].children[0].data;
+        let timeCreating = post.children[0].children[2].children[1].children[0].children[0].children[1].children[0].data;        
+        let comments = post.children[0].children[2].children[1].children[0].children[2].children[1].children[0].children[0].data;
+        let category = post.children[0].children[0].children[0].children[0].children[0].children[0].data;        
+        let author = post.children[0].children[2].children[1].children[0].children[1].children[1].children[0].data;        
 
+        let article = new Article(source, title, href, category, timeCreating, author, imageSource, comments, 0, 0);
         posts.push(article);
     };
 
     /*
         Method for showing info about post
     */
-    function showInfo(posts) {
+    that.showInfo = (posts) => {
         logger.info('Count of parse posts: ' + posts.length);
-        
         for (var i = 0, len = posts.length; i < len; i++) {
-            logger.info('---------------------');
-            logger.info(posts[i].id);
-            logger.info(posts[i].title);
-            logger.info('Категория: ' + posts[i].category);
-            logger.info('Автор: ' + posts[i].author);
-            logger.info('---------------------');
+            logger.info(posts[i].getArticleInfo());
+            logger.debug('---------------------');
         }
     };
 
